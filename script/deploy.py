@@ -10,5 +10,5 @@ def deploy() -> VyperContract:
     return mox_contract
 
 def moccasin_main() -> VyperContract:
-    deploy()
+    return deploy()
 

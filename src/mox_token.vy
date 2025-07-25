@@ -15,6 +15,11 @@ initializes: erc20[ownable := ow]
 # -- Exports -- #
 exports: (erc20.__interface__)
 
+# -- Errors -- #
+ERROR_NOT_OWNER: public(constant(String[70])) = "Modafucka, you are not the owner!!!"
+ERROR_NO_ZERO: public(constant(String[70])) = "Cannot increase/decrease to modafuckin zero!!!"
+ERROR_CAN_NOT: public(constant(String[70])) = "Cannot increase/decrease to the modafuckin current max supply!!!"
+
 # -- Storage -- #
 NAME: constant(String[25]) = "Mox_Token"
 SYMBOL : constant(String[5]) = "$mxtk"
@@ -37,22 +42,22 @@ def __init__(max_supply: uint256):
 # -- Modifers -- #
 @internal 
 def _only_owner():
-    assert msg.sender == OWNER, "Not the modafuckin owner!!!"
+    assert msg.sender == OWNER, ERROR_NOT_OWNER
 
 
 # -- External Defs -- #
 @external 
 def increase_max_supply(new_max_supply: uint256):
     self._only_owner()
-    assert new_max_supply != 0, "Cannot increase to zero!!!"
-    assert new_max_supply != self.MAX_SUPPLY, "Cannot increase to current max supply!!!"
+    assert new_max_supply != 0, ERROR_NO_ZERO
+    assert new_max_supply != self.MAX_SUPPLY, ERROR_CAN_NOT
     self.MAX_SUPPLY = new_max_supply 
 
 @external 
 def decrease_max_supply(new_max_supply: uint256):
     self._only_owner()
-    assert new_max_supply != 0, "Cannot decrease to zero!!!"
-    assert new_max_supply != self.MAX_SUPPLY, "Cannot decrease to current max supply!!!"
+    assert new_max_supply != 0, ERROR_NO_ZERO
+    assert new_max_supply != self.MAX_SUPPLY, ERROR_CAN_NOT
     self.MAX_SUPPLY = new_max_supply
 
 
