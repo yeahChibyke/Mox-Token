@@ -55,3 +55,8 @@ def test_non_owner_cannot_increase_max_supply(mox, non_owner):
             mox.increase_max_supply(IMS)
          
 
+# -- EVENTS -- #
+
+def test_increasing_max_supply_emits_events(mox, owner):
+    pass 
+
