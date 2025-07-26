@@ -8,8 +8,9 @@ import boa
 # -- Session Fixtures -- #
 
 @pytest.fixture(scope = "session")
-def owner():
-    return get_active_network().get_default_account()
+def owner(mox):
+    # return get_active_network().get_default_account()
+    return mox.owner()
 
 @pytest.fixture(scope = "session")
 def mox():
