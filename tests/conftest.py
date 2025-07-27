@@ -1,25 +1,34 @@
 # -- Imports -- #
-import pytest 
-from moccasin.config import get_active_network
-from script.deploy import deploy, MAX_SUPPLY
+import pytest
+
+# from moccasin.config import get_active_network
+from script.deploy import deploy
+
 # from eth_utils import to_wei
-import boa 
+import boa
 
 # -- Session Fixtures -- #
 
-@pytest.fixture(scope = "session")
+
+@pytest.fixture(scope="session")
 def owner(mox):
     # return get_active_network().get_default_account()
     return mox.owner()
 
-@pytest.fixture(scope = "session")
+
+@pytest.fixture(scope="session")
 def mox():
     return deploy()
 
 
+@pytest.fixture(scope="session")
+def mx_sup(mox):
+    return mox.get_max_supply()
+
+
 # -- Function Fixtures -- #
 
-@pytest.fixture(scope = "function")
+
+@pytest.fixture(scope="function")
 def non_owner():
     return boa.env.generate_address("non_owner")
-
