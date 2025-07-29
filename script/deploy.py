@@ -1,6 +1,7 @@
-from moccasin.boa_tools import VyperContract
-from src import mox_token
 from eth_utils import to_wei
+from moccasin.boa_tools import VyperContract
+
+from src import mox_token
 
 MAX_SUPPLY = to_wei(1000, "ether")
 

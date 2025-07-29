@@ -1,14 +1,24 @@
-# -- Imports -- #
+# ------------------------------------------------------------------
+#                             IMPORTS
+# ------------------------------------------------------------------
+
+
 import boa
 from eth_utils import to_wei
 
-# -- Variables -- #
+# ------------------------------------------------------------------
+#                            VARIABLES
+# ------------------------------------------------------------------
+
+
 SMS = to_wei(1000, "ether")  # Starting Max Supply
 IMS = to_wei(5000, "ether")  # Increased Max Supply
 DMS = to_wei(100, "ether")  # Decreased Max Supply
 
 
-# -- Tests -- #
+# ------------------------------------------------------------------
+#                              TESTS
+# ------------------------------------------------------------------
 
 
 def test_owner(mox, owner):
@@ -31,7 +41,9 @@ def test_decrease_max_supply(mox, owner):
     assert mox.get_max_supply() == DMS
 
 
-# -- Reverts -- #
+# ------------------------------------------------------------------
+#                             REVERTS
+# ------------------------------------------------------------------
 
 
 def test_cannot_increase_max_supply_to_zero(mox, owner):
@@ -64,7 +76,9 @@ def test_non_owner_cannot_increase_max_supply(mox, non_owner):
             mox.increase_max_supply(IMS)
 
 
-# -- EVENTS -- #
+# ------------------------------------------------------------------
+#                              EVENTS
+# ------------------------------------------------------------------
 
 
 def test_increasing_max_supply_emits_events(mox, owner):

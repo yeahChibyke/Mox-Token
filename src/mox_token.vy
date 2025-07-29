@@ -1,23 +1,33 @@
 # @pragma >= 0.4.0
 
-# -- IMPORTS -- #
+# ------------------------------------------------------------------
+#                             IMPORTS
+# ------------------------------------------------------------------
 from snekmate.auth import ownable as ow
 from snekmate.tokens import erc20
 from ethereum.ercs import IERC20
 
-# -- IMPLEMENTATIONS -- #
+# ------------------------------------------------------------------
+#                         IMPLEMENTATIONS
+# ------------------------------------------------------------------
 implements: IERC20
 
-# -- INITIALIZERS -- #
+# ------------------------------------------------------------------
+#                           INITIALIZERS
+# ------------------------------------------------------------------
 initializes: ow
 initializes: erc20[ownable := ow]
 
 
-# -- EXPORTS -- #
+# ------------------------------------------------------------------
+#                             EXPORTS
+# ------------------------------------------------------------------
 exports: erc20.__interface__
 
 
-# -- ERRORS -- #
+# ------------------------------------------------------------------
+#                              ERRORS
+# ------------------------------------------------------------------
 ERROR_NOT_OWNER: public(
     constant(String[70])
 ) = "Modafucka, you are not the owner!!!"
@@ -28,7 +38,9 @@ ERROR_CAN_NOT: public(
     constant(String[70])
 ) = "Cannot increase/decrease to the modafuckin current max supply!!!"
 
-# -- EVENTS -- #
+# ------------------------------------------------------------------
+#                              EVENTS
+# ------------------------------------------------------------------
 event MaxSupplyIncreased:
     previous_max: indexed(uint256)
     new_max: indexed(uint256)
@@ -41,7 +53,9 @@ event MaxSupplyDecreased:
     caller: address
 
 
-# -- STORAGE -- #
+# ------------------------------------------------------------------
+#                             STORAGE
+# ------------------------------------------------------------------
 NAME: constant(String[25]) = "Mox_Token"
 SYMBOL: constant(String[5]) = "$mxtk"
 DECIMALS: constant(uint8) = 18
@@ -51,7 +65,9 @@ MAX_SUPPLY: uint256
 OWNER: immutable(address)
 
 
-# -- CONSTRUCTOR -- #
+# ------------------------------------------------------------------
+#                           CONSTRUCTOR
+# ------------------------------------------------------------------
 @deploy
 def __init__(max_supply: uint256):
     ow.__init__()
@@ -60,13 +76,17 @@ def __init__(max_supply: uint256):
     OWNER = msg.sender
 
 
-# -- MODIFIERS -- #
+# ------------------------------------------------------------------
+#                            MODIFIERS
+# ------------------------------------------------------------------
 @internal
 def _only_owner():
     assert msg.sender == OWNER, ERROR_NOT_OWNER
 
 
-# -- EXTERNAL DEFS -- #
+# ------------------------------------------------------------------
+#                          EXTERNAL DEFS
+# ------------------------------------------------------------------
 @external
 def increase_max_supply(new_max_supply: uint256):
     self._only_owner()
@@ -99,7 +119,9 @@ def decrease_max_supply(new_max_supply: uint256):
     )
 
 
-# -- GETTER DEFS -- #
+# ------------------------------------------------------------------
+#                           GETTER DEFS
+# ------------------------------------------------------------------
 @external
 @view
 def get_max_supply() -> uint256:

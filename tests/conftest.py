@@ -1,13 +1,18 @@
-# -- Imports -- #
+# ------------------------------------------------------------------
+#                             IMPORTS
+# ------------------------------------------------------------------
+
+
+# from eth_utils import to_wei
+import boa
 import pytest
 
 # from moccasin.config import get_active_network
 from script.deploy import deploy
 
-# from eth_utils import to_wei
-import boa
-
-# -- Session Fixtures -- #
+# ------------------------------------------------------------------
+#                         SESSION FIXTURES
+# ------------------------------------------------------------------
 
 
 @pytest.fixture(scope="session")
@@ -26,7 +31,9 @@ def mx_sup(mox):
     return mox.get_max_supply()
 
 
-# -- Function Fixtures -- #
+# ------------------------------------------------------------------
+#                        FUNCTION FIXTURES
+# ------------------------------------------------------------------
 
 
 @pytest.fixture(scope="function")
