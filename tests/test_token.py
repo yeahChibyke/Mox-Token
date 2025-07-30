@@ -91,3 +91,16 @@ def test_increasing_max_supply_emits_events(mox, owner):
         assert event.previous_max == SMS
         assert event.new_max == IMS
         assert event.caller == owner
+
+
+def test_decreasing_max_supply_emits_events(mox, owner):
+    with boa.env.prank(owner):
+        mox.decrease_max_supply(DMS)
+        mox_logs = mox.get_logs()
+        # Access the event fields directly
+        assert len(mox_logs) == 1
+        event = mox_logs[0]
+        assert event.previous_max == SMS 
+        assert event.new_max == DMS 
+        assert event.caller == owner 
+        
