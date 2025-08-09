@@ -100,7 +100,6 @@ def test_decreasing_max_supply_emits_events(mox, owner):
         # Access the event fields directly
         assert len(mox_logs) == 1
         event = mox_logs[0]
-        assert event.previous_max == SMS 
-        assert event.new_max == DMS 
-        assert event.caller == owner 
-        
+        assert event.previous_max == SMS
+        assert event.new_max == DMS
+        assert event.caller == owner
