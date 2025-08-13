@@ -9,6 +9,7 @@ dependencies = [
     "moccasin>=0.4.2",
     "ruff>=0.12.8",
     "vheader>=0.1.1",
+    "vyper>=0.4.3",
 ]
 
 [tool.moccasin.project]
