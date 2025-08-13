@@ -30,3 +30,4 @@ class MaxSupplyIncreaseAndDecreaseFuzzer(RuleBasedStateMachine):
 
 TokenFuzzing = MaxSupplyIncreaseAndDecreaseFuzzer.TestCase
 TokenFuzzing.settings = settings(max_examples=1000, stateful_step_count=50)
+
